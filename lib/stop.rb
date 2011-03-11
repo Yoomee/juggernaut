@@ -1,6 +1,6 @@
 pid = File.read("node.pid")
 %x{ps -ef | grep #{pid}}.split("\n").each do |line|
-  if !line.match(/grep/) && res = line.match(/.*+\s(\d+)\s#{pid}\s/)
+  if !line.match(/grep/) && res = line.match(/.*\s(\d+)\s#{pid}\s/)
     cpid = res[1]
     %x{kill #{cpid}}
   end
