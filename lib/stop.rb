@@ -8,7 +8,16 @@ def get_pids(command)
   pids
 end
 
-pid_file_path = "/var/run/juggernaut.pid"
+def pid_file_path
+  "/var/run/juggernaut.pid"  
+end
+
+def empty_pid_file
+  if File.exists?(pid_file_path)
+    File.open(pid_file_path, 'w') {|f| f.write("")}
+  end
+end
+
 (pids = get_pids("node server.js")).each do |pid|
   %x{kill #{pid}}
 end
@@ -17,4 +26,4 @@ if pids.empty?
 else
   puts "Stopped node server."
 end
-%x{rm #{pid_file_path}} if File.exists?(pid_file_path)
+empty_pid_file
