@@ -24,4 +24,4 @@ if pids.empty?
 else
   puts "Stopped node server."
 end
-delete_pid_file
+# delete_pid_file
