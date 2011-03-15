@@ -1,4 +1,4 @@
-pid_file_path = "/var/run/juggernaut/node.pid"
+pid_file_path = "/var/run/juggernaut.pid"
 pid = File.read(pid_file_path)
 %x{ps -ef | grep #{pid}}.split("\n").each do |line|
   if !line.match(/grep/) && res = line.strip.match(/^.*\s+(\d+)\s+#{pid}\s/)
