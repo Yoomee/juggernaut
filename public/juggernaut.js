@@ -17,9 +17,17 @@ var Juggernaut = function(options){
   this.state    = "disconnected";
   this.meta     = this.options.meta;
 
-  this.socket = new io.Socket(this.host,
-    {rememberTransport: false, port: this.port, secure: this.options.secure}
-  );
+  this.options.ie7 = this.options.ie7 || false;
+  
+  if (this.options.ie7){
+    this.socket = new io.Socket(this.host,
+      {rememberTransport: false, port: this.port, secure: this.options.secure, transports:['jsonp-polling']}
+    );
+  } else {
+    this.socket = new io.Socket(this.host,
+      {rememberTransport: false, port: this.port, secure: this.options.secure}
+    );
+  }
 
   this.socket.on("connect",    this.proxy(this.onconnect));
   this.socket.on("message",    this.proxy(this.onmessage));
