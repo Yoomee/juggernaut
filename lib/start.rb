@@ -43,4 +43,4 @@ end
 #   end
 # end
 
-IO.popen("cd #{root_path} && node server.js &> /var/log/node.log")
+IO.popen("cd #{root_path} && /usr/local/bin/node server.js &> /var/log/node.log")
